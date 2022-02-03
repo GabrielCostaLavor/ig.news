@@ -1,3 +1,4 @@
+import { SingInButton } from './SingInButton'
 import styleClass from './style.module.scss'
 
 export function Header(){
@@ -9,14 +10,11 @@ export function Header(){
                     <img src="/imagens/ig.news.svg" alt="" />
                 </div>
                 <nav>
-                    <div className="homeMenu"><a href="#">Home</a></div>
-                    <div className="postsMenu"><a href="#">Posts</a></div>
+                    <a href="#" className={styleClass.active}>Home</a> 
+                    <a href="#">Posts</a>
                 </nav>
                 <div className={styleClass['sing-in-header']}>
-                        <button>
-                            <img src="/imagens/Github.png" alt="" />
-                            <span>Sing in with GitHub</span>
-                        </button>
+                    <SingInButton />
                 </div>
             </div>
         </header>

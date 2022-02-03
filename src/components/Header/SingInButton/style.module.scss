@@ -1,0 +1,33 @@
+.buttonSingIn{
+    display: flex;
+    align-items: center;
+    background-color: #1F2729;
+    color: var(--white);
+    padding: 12px 24px 12px 16px;
+    border: none;
+    border-radius: 30px;
+    transition: background 0.3s, color 0.3s;
+    .logged{
+        color: var(--green);
+        width: 24px;
+        height: 24px;
+    }
+    .notLogged{
+        color: var(--yellow);
+        width: 24px;
+        height: 24px;
+    }
+    &:hover{
+        background-color: var(--white);
+        color: #1F2729;
+    }
+    span{
+        padding-left: 15px;
+    }
+    .iconClose{
+        color: #737380;
+        width: 24px;
+        height: 24px;
+        margin-left: 15px;
+    }
+}

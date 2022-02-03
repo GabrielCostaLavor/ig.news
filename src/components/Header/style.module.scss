@@ -24,27 +24,33 @@
         a{
             color: var(--textos);
             margin-right: 20px;
-            transition: color 0.2s;
+            transition: color 0.1s;
             padding: 0 10px;
             position: relative;
-
+            height: 100%;
+            display: flex;
+            align-items: center;
             &:hover{
+                color: var(--white);
+                font-weight: bold;
+            }
+
+            &.active{
                 color: var(--white);
                 font-weight: bold;
                 &::before{
                     content: "";
                     display: block;
-                    width: 100%;
-                    background-color: var(--yellow);
-                    height: 3px;
-                    position: absolute;
-                    left: 0;
-                    bottom: -33px;
-                    border-top-left-radius: 15px;
-                    border-top-right-radius: 15px;
-                }
+                        width: 100%;
+                        background-color: var(--yellow);
+                        height: 3px;
+                        position: absolute;
+                        left: 0;
+                        bottom: -17px;
+                        border-top-left-radius: 15px;
+                        border-top-right-radius: 15px;
+                    }
             }
-            
         }
     }
 }
@@ -52,16 +58,4 @@
     flex: 4;
     display: flex;
     justify-content: right;
-    button{
-        display: flex;
-        align-items: center;
-        background-color: #1F2729;
-        color: var(--white);
-        padding: 12px 24px 12px 16px;
-        border: none;
-        border-radius: 30px;
-        img{
-            padding-right: 15px;
-        }
-    }
 }
