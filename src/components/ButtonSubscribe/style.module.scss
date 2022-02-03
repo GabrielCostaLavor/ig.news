@@ -1,0 +1,15 @@
+.buttonSubscribe{
+    font-size: 1.25rem;
+    color: #121214;
+    padding: 20px 62px;
+    background-color: var(--yellow);
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    transition: filter 0.3s;
+    display: inherit;
+    width: 260px;
+    &:hover{
+        filter: brightness(0.8);
+    }
+}
