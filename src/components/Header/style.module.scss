@@ -1,0 +1,33 @@
+//Module eu add só se eu for usar em um unico componente
+.header{
+    border-bottom: var(--white);
+    padding: 1.125rem 0;
+}
+.headerContainer{
+    color: violet;
+    display: flex;
+    width: 100%;
+
+    .LogoMenu{
+        flex: 3;
+    }
+    nav{
+        flex: 6;
+        display: flex;
+        padding-left: 80px;
+        a{
+            color: var(--textos);
+            padding-right: 32px;
+            :hover{
+                color: var(--titulos);
+            }
+        }
+    }
+    .sing-in-header{
+        flex: 3;
+        button.button-login{
+            background-color: #1F2729;
+            padding: 12px 24px 12px 16px;
+        }
+    }
+}
