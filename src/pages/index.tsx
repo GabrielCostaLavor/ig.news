@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async() => {
     }).format(price.unit_amount / 100),
   };
 
-  console.log(product)
+  //console.log(product)
   return {
     //Props é um atributo da função que vai retornar tudo que botar nele como parametro
     props: {

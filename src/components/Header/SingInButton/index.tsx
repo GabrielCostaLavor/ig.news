@@ -4,8 +4,9 @@ import {FiX} from 'react-icons/fi'
 import { signIn, useSession, signOut } from "next-auth/client"
 
 export function SingInButton(){
+    //Serve pra verificar a situação do usuario, se ele está logado ou não
     const [session] = useSession();
-    console.log(session)
+    //console.log(session)
     return session  ? (
         <button className={styleClass.buttonSingIn}>
             <FaGithub className={styleClass.logged}/>
