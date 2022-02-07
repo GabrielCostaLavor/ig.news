@@ -1,21 +1,19 @@
 import styleClass from './style.module.scss'
 import {FaGithub} from 'react-icons/fa'
 import {FiX} from 'react-icons/fi'
-export function SingInButton(){
-    const isUserLoggedIn = false;
+import { signIn, useSession } from "next-auth/client"
 
-    function iconClose(){
-        
-    }
+export function SingInButton(){
+    const [session] = useSession();
     
-    return isUserLoggedIn ? (
+    return session  ? (
         <button className={styleClass.buttonSingIn}>
             <FaGithub className={styleClass.logged}/>
             <span>Nome do usuario</span>
-            <FiX className={styleClass.iconClose} onClick={iconClose}/>
+            <FiX className={styleClass.iconClose} />
         </button>
     ) : (
-        <button className={styleClass.buttonSingIn}>
+        <button className={styleClass.buttonSingIn} onClick={() => {signIn('github')}}>
             <FaGithub className={styleClass.notLogged}/>
             <span>Sing in with GitHub</span>
         </button>
