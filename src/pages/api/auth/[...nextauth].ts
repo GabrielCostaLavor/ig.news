@@ -18,7 +18,7 @@ export default NextAuth({
           try{
             const userActiveSubscription = await fauna.query(
               q.Get(
-                q.Intersection(
+                q.Intersection([
                   q.Match(
                     q.Index('subscription_by_user_ref'),
                     q.Select(
@@ -34,8 +34,8 @@ export default NextAuth({
                   q.Match(
                     q.Index('subscription_by_status'),
                     "active"
-                  )
-                )
+                  ),
+                ])
               )
             )
             return{
