@@ -1,0 +1,31 @@
+.postPageContainer{
+    width: 100%;
+    max-width: 728px;
+    margin: auto;
+    padding: 80px 10px 90px;
+
+    .postPageTitle{
+        font-size: 3.375rem;
+        line-height: 60px;
+        color: var(--white);
+    }
+    .postPageDate{
+        margin: 24px 0 24px;
+    }
+    .postPageContent{
+        h1, h2, h3, h4{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            color: var(--white);
+        }
+        p{
+            font-size: 18px;
+            color: var(--textos);
+            padding-top: 20px;
+
+            a{
+                color: var(--textos);
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
-import { query as q} from "faunadb"
+import { query as q, query} from "faunadb"
 import { fauna } from "../../../service/faunadb"
 
 export default NextAuth({
@@ -14,6 +14,41 @@ export default NextAuth({
     ],
     //Callback é quando executo algo logo depois de uma ação
     callbacks: {
+      async session(session) {
+          try{
+            const userActiveSubscription = await fauna.query(
+              q.Get(
+                q.Intersection(
+                  q.Match(
+                    q.Index('subscription_by_user_ref'),
+                    q.Select(
+                      'ref',
+                      q.Get(
+                        q.Match(
+                          q.Index('user_by_email'),
+                          q.Casefold(session.user.email)
+                        )
+                      )
+                    )
+                  ),                
+                  q.Match(
+                    q.Index('subscription_by_status'),
+                    "active"
+                  )
+                )
+              )
+            )
+            return{
+              ...session,
+              ActiveSubscription : userActiveSubscription
+            }
+          }catch{
+            return {
+              ...session,
+              ActiveSubscription: null
+            }
+          }
+      },
       async signIn(user, account, profile) {
         const { email } = user;
         try {

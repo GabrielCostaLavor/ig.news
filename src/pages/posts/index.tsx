@@ -3,6 +3,7 @@ import { getPrismicClient } from '../../service/prismic'
 import styleClass from './style.module.scss'
 import Prismic from '@prismicio/client'
 import { RichText } from 'prismic-dom'
+import Link from 'next/link'
 
 type postsArray = {
     slug: string;
@@ -28,7 +29,8 @@ export default function Posts({posts} : propsPosts){
                     posts.map(postsData =>(
                         /* {console.log(postsData)} */
                     <div className={styleClass.postContents}>
-                        <a key={postsData.slug} href="">
+                        <Link href={'/posts/'+ postsData.slug}>
+                        <a key={postsData.slug} >
                             <div className={styleClass.postsDate}>
                                 {postsData.updateAt}
                             </div>
@@ -43,6 +45,7 @@ export default function Posts({posts} : propsPosts){
                                 </div>
                             </div>
                         </a>
+                        </Link>
                     </div>
                     ))
                     }

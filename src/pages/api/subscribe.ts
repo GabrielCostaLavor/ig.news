@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, respo: NextApiResponse) => {
                 )
             )
         )
-
+        console.log(session)
         let customerId = user.data.stripe_customer_id;
 
         if(!customerId){
