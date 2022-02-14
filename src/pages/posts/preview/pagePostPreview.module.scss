@@ -1,0 +1,60 @@
+.postPageContainer{
+    width: 100%;
+    max-width: 728px;
+    margin: auto;
+    padding: 80px 10px 90px;
+
+    .postPageTitle{
+        font-size: 3.375rem;
+        line-height: 60px;
+        color: var(--white);
+    }
+    .postPageDate{
+        margin: 24px 0 24px;
+    }
+    .postPageContent{
+        background: linear-gradient(#ffffff, transparent);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        h1, h2, h3, h4{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            color: var(--white);
+        }
+        p{
+            font-size: 18px;
+            color: #E1E1E6;
+            padding-top: 20px;
+
+            a{
+                color: var(--textos);
+            }
+        }
+
+    }
+    .buttonPreviewSubscribe{
+        padding: 27px 0;
+        margin-top: 28px;
+        width: 100%;
+        background-color: #1F2729;
+        font-size: 1.25rem;
+        font-weight: 600;
+        border-radius: 100px;
+        border: none;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: filter 0.5;
+        &:hover{
+            filter: brightness(0.8);
+        }
+        span{
+            color: var(--yellow);
+        }
+        img{
+            padding-left: 15px;
+        }
+    }
+}

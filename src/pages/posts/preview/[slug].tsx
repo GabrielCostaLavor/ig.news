@@ -1,11 +1,15 @@
-import { GetServerSideProps } from "next";
-import { getSession } from 'next-auth/client'
+import { GetStaticProps } from "next";
+import { getSession, useSession } from 'next-auth/client'
 import Head from "next/head";
-import styleClass from './pagePost.module.scss'
+import styleClass from './pagePostPreview.module.scss'
 import { RichText } from "prismic-dom";
-import { getPrismicClient } from "../../service/prismic";
+import { getPrismicClient } from "../../../service/prismic";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-interface pagePostsProps{
+
+interface pagePostsPropsPreview{
     post : {
         slug: string,
         title: string,
@@ -13,7 +17,15 @@ interface pagePostsProps{
         updateAt: string,
     }
 }
-export default function Post({post} : pagePostsProps){
+export default function PostPreview({post} : pagePostsPropsPreview){
+    const [session] = useSession()
+    const router = useRouter() 
+
+    useEffect(() => {
+        if(session?.ActiveSubscription){
+            router.push(`/posts/${post.slug}`)
+        }
+    }, [session])
     return(
         <>
         <Head>
@@ -30,26 +42,28 @@ export default function Post({post} : pagePostsProps){
                 <div dangerouslySetInnerHTML={{ __html: post.content}} className={styleClass.postPageContent}>
                 </div>
             </article>
+            <Link href='/'>
+            <button className={styleClass.buttonPreviewSubscribe} type="submit">
+                Wanna continue reading? <span>Subscribe now </span><img src="/imagens/image 50.png" alt="" />
+            </button>
+            </Link>
         </main>
         </>
     )
 }
-export const getServerSideProps: GetServerSideProps =async ({req, params}) => {
-    const session = await getSession({req})
+export const getStaticPaths = () => {
+    return{
+        paths: [],
+        fallback: 'blocking'
+    }
+}
+export const getStaticProps: GetStaticProps =async ({params}) => {
+
+    //getStaticProps não recebe requisições
     //Para pegar a variavel de url que será meu slug
     const {slug} = params
 
-    console.log(session)
-    if(!session?.ActiveSubscription){
-        return {
-            redirect:{
-            destination: `/`,
-            permanent: false
-            }
-        }
-    }
-
-    const prismic = getPrismicClient(req)
+    const prismic = getPrismicClient()
 
     const response = await prismic.getByUID('post', String(slug), {})
 
@@ -57,7 +71,7 @@ export const getServerSideProps: GetServerSideProps =async ({req, params}) => {
     const post={
         slug,
         title: RichText.asText(response.data.title),
-        content: RichText.asHtml(response.data.content),
+        content: RichText.asHtml(response.data.content.splice(0, 4)),
         updateAt: new Date(response.last_publication_date).toLocaleDateString(
             'pt-BR',{
                 day: '2-digit',
@@ -69,6 +83,7 @@ export const getServerSideProps: GetServerSideProps =async ({req, params}) => {
     return{
         props:{
             post
-        }
+        },
+        redirect: 60 * 60 //uma hr
     }
 }
